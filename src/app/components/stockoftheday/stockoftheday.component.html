@@ -1,0 +1,78 @@
+<div>
+
+  <div>
+    <div class="spacer"></div>
+    <h1 class="text-center">Stock of The Day (updated every 24 hours)</h1>
+    <mat-progress-bar *ngIf="stockofthedayloadingIndicator$|async" mode="query"></mat-progress-bar>
+         
+    <div class="page-content mt-5">
+       
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-evenly">
+          <ng-container *ngIf="stockOftheDaySource.length > 0; else noStock">
+          <div fxFlex="50" fxFlex.sm="80" fxFlex.xs="100" *ngFor="let trade of stockOftheDaySource" style="padding: 2px;margin-bottom: 1em">
+            <mat-card class="card">
+              <mat-card-title fxLayoutAlign="center">Updated {{checkDate(trade.createdon)| date: ' dd/mm/yy , EEEE'}}</mat-card-title>
+    
+
+              <mat-card-content>
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong>Symbol :</strong></mat-label>
+                  <span>{{trade.symbol}}</span>
+                 
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong>Current Stock Price  :</strong> </mat-label>
+                  <span>{{trade.currentStockPrice}}</span>
+                </div>
+    
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong> Price :</strong> </mat-label>
+                 <span> {{trade.trans[0].strikeprice}}</span>
+              
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong> Posted For :</strong> </mat-label>
+                 <span> {{trade.postedFor}}</span>
+              
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong> Transaction Type :</strong> </mat-label>
+                 <span> {{trade.trans[0].transtype}}</span>
+              
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong> Above Resistance :</strong> </mat-label>
+                 <span> {{trade.aboveResistance}}</span>
+              
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong> Below Resistance :</strong> </mat-label>
+                 <span> {{trade.belowResistance}}</span>
+              
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="1em" style="padding: 1px;margin-bottom: 1em">
+                  <mat-label fxFlex="30%"><strong> Stop Loss :</strong> </mat-label>
+                 <span> {{trade.stopLoss}}</span>
+              
+                </div>
+              </mat-card-content>
+             
+            </mat-card>
+          </div>
+        </ng-container>
+          <ng-template #noStock>
+            <div fxFlex="80" fxFlex.sm="33.3" fxFlex.xs="50" style="padding: 2px;margin-bottom: 1em">
+            <mat-card class="card">
+              <mat-card-title fxLayoutAlign="center">No Stocks Today</mat-card-title>
+             
+            </mat-card>
+            </div>
+          </ng-template>
+       
+        </div>
+      </div>
+    </div>
+    
+</div>
+</div>
